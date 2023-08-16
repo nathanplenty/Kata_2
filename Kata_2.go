@@ -23,14 +23,28 @@ func (q *Queue) Enqueue(v interface{}) {
 }
 
 func (q *Queue) Dequeue() (int, bool) {
-	// Get Item at the front and queue it
-	return 0, false
+	// Get Item at the front and dequeue it
+	b := false
+	i := 0
+	if q.IsEmpty() == false {
+		b = true
+		q.Peek()
+		q.Value = q.Value[i:]
+		fmt.Println("First Index poped!")
+	}
+	return i, b
 }
 
 func (q *Queue) Peek() (int, bool) {
 	// Get Item at the front
-
-	return 0, false
+	b := false
+	i := 0
+	if q.IsEmpty() == false {
+		b = true
+		v := q.Value[0]
+		fmt.Println("Index:", i, ", Value:", v)
+	}
+	return i, b
 }
 
 func (q *Queue) IsEmpty() bool {
@@ -48,9 +62,7 @@ func main() {
 	queue.Enqueue(5)
 	queue.Enqueue(10)
 	queue.Enqueue(15)
-	val, _ := queue.Peek()
-	fmt.Println(val) // Output: 5
-	val, _ = queue.Dequeue()
-	fmt.Println(val)                          // Output: 5
-	fmt.Println("Is empty?", queue.IsEmpty()) // Output: false
+	queue.Peek()
+	queue.Dequeue()
+	fmt.Println("Is empty?", queue.IsEmpty())
 }
