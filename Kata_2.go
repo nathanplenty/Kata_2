@@ -14,31 +14,31 @@ func CreateNewQueue() *Queue {
 }
 
 // Get Item and queue it at the back
-func (q *Queue) EnqueueNewValue(v interface{}) {
-	q.Values = append(q.Values, v)
+func (queue *Queue) EnqueueNewValue(v interface{}) {
+	queue.Values = append(queue.Values, v)
 }
 
 // Get Item at the front and dequeue it
-func (q *Queue) DequeueOldestValue() interface{} {
-	if q.IsQueueEmpty() == true {
+func (queue *Queue) DequeueOldestValue() interface{} {
+	if queue.IsQueueEmpty() == true {
 		return "nil"
 	}
 	// <!> Full slice expressions
-	dequeuedValue := q.PeekOldestValue()
-	q.Values = q.Values[0:]
+	dequeuedValue := queue.PeekOldestValue()
+	queue.Values = queue.Values[1:]
 	return dequeuedValue
 }
 
 // Get Item at the front
-func (q *Queue) PeekOldestValue() interface{} {
-	return q.Values[0]
+func (queue *Queue) PeekOldestValue() interface{} {
+	return queue.Values[0]
 }
 
 // Check if queue is empty
-func (q *Queue) IsQueueEmpty() bool {
+func (queue *Queue) IsQueueEmpty() bool {
 	// <!> Is this the correct var
 	// <!> If possible to One-Liner
-	if len(q.Values) == 0 {
+	if len(queue.Values) == 0 {
 		return true
 	}
 	return false
