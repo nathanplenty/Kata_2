@@ -5,30 +5,27 @@ import (
 )
 
 func TestIsEmpty(t *testing.T) {
-	b := false
-	stack := NewQueue()
-	b = stack.IsEmpty()
+	stack := CreateNewQueue()
+	b := stack.IsQueueEmpty()
 	if b != true {
 		t.Errorf("b = %v; want true", b)
 	}
 }
 
 func TestEnqueuePeek(t *testing.T) {
-	stack := NewQueue()
-	stack.Enqueue(5)
-	i := stack.Peek()
-	v := stack.Values[i]
+	stack := CreateNewQueue()
+	stack.EnqueueNewValue(5)
+	v := stack.PeekOldestValue()
 	if v != 5 {
 		t.Errorf("v = %v; want 5", v)
 	}
 }
 
 func TestDequeue(t *testing.T) {
-	stack := NewQueue()
-	stack.Enqueue(5)
-	stack.Enqueue(10)
-	i := stack.Dequeue()
-	v := stack.Values[i]
+	stack := CreateNewQueue()
+	stack.EnqueueNewValue(5)
+	stack.EnqueueNewValue(10)
+	v := stack.DequeueOldestValue()
 	if v != 5 {
 		t.Errorf("v = %v; want 5", v)
 	}
