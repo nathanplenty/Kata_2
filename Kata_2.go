@@ -2,56 +2,46 @@ package main
 
 import "fmt"
 
-// Basic queue data structure FIFO
 type Queue struct {
-	// store one Values of any type
 	Values []interface{}
 }
 
-func NewQueue() *Queue {
-	// init dynamic array with placeholder of any type and len of 0
+func CreateNewQueue() *Queue {
 	queue := Queue{}
 	return &queue
 }
 
-func (q *Queue) Enqueue(v interface{}) {
-	// Get Item and queue it at the back
-	q.Values = append(q.Values, v)
+func (queue *Queue) EnqueueNewValue(value interface{}) {
+	queue.Values = append(queue.Values, value)
 }
 
-func (q *Queue) Dequeue() int {
-	// Get Item at the front and dequeue it
-	i := 0
-	if q.IsEmpty() == true {
-		return i
+func (queue *Queue) DequeueOldestValue() interface{} {
+	if queue.IsQueueEmpty() == true {
+		return nil
 	}
-	q.Values = q.Values[i:]
-	return i
+	dequeuedValue := queue.PeekOldestValue()
+	lengthOfValue := len(queue.Values)
+	queue.Values = queue.Values[1:lengthOfValue:lengthOfValue]
+	return dequeuedValue
 }
 
-func (q *Queue) Peek() int {
-	// Get Item at the front
-	i := 0
-	return i
-}
-
-func (q *Queue) IsEmpty() bool {
-	// Check if queue is empty
-	b := false
-	// !! Is this the correct var? !!
-	if len(q.Values) == 0 {
-		b = true
+func (queue *Queue) PeekOldestValue() interface{} {
+	if queue.IsQueueEmpty() == true {
+		return nil
 	}
-	return b
+	return queue.Values[0]
+}
+
+func (queue *Queue) IsQueueEmpty() bool {
+	return queue.Values == nil
 }
 
 func main() {
-	queue := NewQueue()
-	queue.Enqueue(5)
-	queue.Enqueue('2')
-	queue.Enqueue("text")
-	fmt.Println("Peek:", queue.Values[queue.Peek()])
-	queue.Peek()
-	queue.Dequeue()
-	fmt.Println("Is empty?", queue.IsEmpty())
+	queue := CreateNewQueue()
+	queue.EnqueueNewValue(5)
+	queue.EnqueueNewValue('2')
+	queue.EnqueueNewValue("text")
+	fmt.Println("Peek:", queue.PeekOldestValue())
+	fmt.Println("Pop:", queue.DequeueOldestValue())
+	fmt.Println("Is empty?", queue.IsQueueEmpty())
 }
