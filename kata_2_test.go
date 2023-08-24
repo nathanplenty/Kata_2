@@ -5,28 +5,36 @@ import (
 )
 
 func TestIsEmpty(t *testing.T) {
-	stack := CreateNewQueue()
-	b := stack.IsQueueEmpty()
-	if b != true {
-		t.Errorf("b = %v; want true", b)
+	queue := CreateNewQueue()
+	boolean := queue.IsQueueEmpty()
+	if boolean != true {
+		t.Errorf("boolean = %v; want true", boolean)
 	}
 }
 
 func TestEnqueuePeek(t *testing.T) {
-	stack := CreateNewQueue()
-	stack.EnqueueNewValue(5)
-	v := stack.PeekOldestValue()
-	if v != 5 {
-		t.Errorf("v = %v; want 5", v)
+	queue := CreateNewQueue()
+	queue.EnqueueNewValue(5)
+	value := queue.PeekOldestValue()
+	if value != 5 {
+		t.Errorf("value = %v; want 5", value)
 	}
 }
 
 func TestDequeue(t *testing.T) {
-	stack := CreateNewQueue()
-	stack.EnqueueNewValue(5)
-	stack.EnqueueNewValue(10)
-	v := stack.DequeueOldestValue()
-	if v != 5 {
-		t.Errorf("v = %v; want 5", v)
+	queue := CreateNewQueue()
+	queue.EnqueueNewValue(5)
+	queue.EnqueueNewValue(10)
+	value := queue.DequeueOldestValue()
+	if value != 5 {
+		t.Errorf("value = %v; want 5", value)
+	}
+}
+
+func TestForNil(t *testing.T) {
+	queue := CreateNewQueue()
+	value := queue.PeekOldestValue()
+	if value != nil {
+		t.Errorf("value = %v; want <nil>", value)
 	}
 }
